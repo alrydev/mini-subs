@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import JumbotronComponent from '../components/JumbotronComponent';
-import NavbarComponent from '../components/NavbarComponent';
+import JumbotronComponent from '../components/parts/JumbotronComponent'
+import NavbarComponent from '../components/parts/NavbarComponent';
+import FooterComponent from '../components/parts/FooterComponent'
 import { Row, Col } from 'react-bootstrap';
 import RegisterAuth from '../components/auth/RegisterAuth';
 import LoginAuth from '../components/auth/LoginAuth';
-import FooterComponent from '../components/FooterComponent';
 
 const LandingPage = () => {
     const [showRegister, setShowRegister] = useState(true);

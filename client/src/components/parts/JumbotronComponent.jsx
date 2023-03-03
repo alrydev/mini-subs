@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import landing from '../assets/landing.png'
-import line from '../assets/line.png'
+import landing from '../../assets/landing.png'
+import line from '../../assets/line.png'
 
 function JumbotronComponent() {
     return (

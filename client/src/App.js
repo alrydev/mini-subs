@@ -7,6 +7,8 @@ import './App.css';
 import LandingPage from './pages/LandingPage';
 import MenuPage from './pages/MenuPage';
 import TransactionsPage from './pages/TransactionsPage';
+import AddCompanyPage from './pages/AddCompanyPage';
+import AddVariantPage from './pages/AddVariantPage';
 
 function App() {
 
@@ -25,7 +27,7 @@ function App() {
       navigate('/');
     } else {
       if (state.user.role === 'admin') {
-        navigate('/transactions');
+        navigate('/transaction');
       } else if (state.user.role === 'user') {
         navigate('/menu');
       }
@@ -37,6 +39,8 @@ function App() {
       <Route exact path="/" element={<LandingPage />} />
       <Route exact path="/menu" element={<MenuPage />} />
       <Route exact path="/transaction" element={<TransactionsPage />} />
+      <Route exact path="/add-company" element={<AddCompanyPage />} />
+      <Route exact path="/add-variant" element={<AddVariantPage />} />
     </Routes>
   );
 }

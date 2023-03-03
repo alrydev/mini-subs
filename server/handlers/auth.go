@@ -110,8 +110,8 @@ func (h *handlerAuth) Login(w http.ResponseWriter, r *http.Request) {
 	loginResponse := authdto.LoginResponse{
 		Name:  user.Name,
 		Email: user.Email,
-		// Password: user.Password,
 		Token: token,
+		Role: user.Role,
 	}
 
 	w.Header().Set("Content-Type", "application/json")

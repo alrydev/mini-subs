@@ -1,6 +1,17 @@
 import React from 'react'
+import { API } from '../../config/api';
 import { Table, Container } from "react-bootstrap";
+import { useQuery } from 'react-query';
 export default function CompaniesComponent({ transactions }) {
+
+    // get variants: 
+    let { data: companies } = useQuery('companiesCache', async () => {
+        const response = await API.get('/companies')
+        return response.data.data
+    })
+
+    console.log("companies ", companies);
+
   return (
     <>
           <Container className="p-5">
