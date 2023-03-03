@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+  background-color: darkblue;
+}
+
+.container-jumbotron {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+}
+
+
+.bluish {
+  color: #93BFCF;
+}
+
+.bg-bluish {
+  background-color: #93BFCF !important;
+}
+
+.bg-navbar {
+  background-color: #93BFCF;
+}
+
+.bg-footer {
+  background-color: #93BFCF;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container-jumbotron {
+    height: auto;
+  }
+}
