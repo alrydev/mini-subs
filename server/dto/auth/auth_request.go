@@ -1,14 +1,13 @@
 package authdto
 
 type RegisterRequest struct {
-	Name string `gorm:"type: varchar(255)" json:"name" form:"name"`
-	CompanyName string `gorm:"type: varchar(255)" json:"company_name" form:"company_name"`
-	Email    string `gorm:"type: varchar(255)" json:"email" form:"email" validate:"required"`
-	Password string `gorm:"type: varchar(255)" json:"password" form:"password" validate:"required"`
+	Name        string `json:"name"`
+	CompanyName string `json:"company_name"`
+	Email       string `json:"email"`
+	Password    string `json:"password"`
 }
 
-
 type LoginRequest struct {
-	Email    string `gorm:"type: varchar(255)" json:"email" validate:"required"`
-	Password string `gorm:"type: varchar(255)" json:"password" validate:"required"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }

@@ -8,6 +8,7 @@ import (
 
 type VariantRepository interface {
 	FindVariant() ([]models.Variant, error)
+	CreateVariant(variant models.Variant) (models.Variant, error)
 }
 
 func RepositoryVariant(db *gorm.DB) *repository {
@@ -20,4 +21,9 @@ func (r *repository) FindVariant() ([]models.Variant, error) {
 	// err := r.db.Preload("User").Preload("Variant").Find(&variants).Error
 
 	return variants, err
+}
+
+func (r *repository) CreateVariant(variant models.Variant) (models.Variant, error) {
+	err := r.db.Create(&variant).Error
+	return variant, err
 }

@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     if (state.isLogin === false) {
-      navigate('/');
+      navigate('/auth');
     } else {
       if (state.user.role === 'admin') {
         navigate('/transaction');
@@ -34,9 +34,35 @@ function App() {
     }
   }, [state]);
 
+  const checkUser = async () => {
+    try {
+      const response = await API.get('/check-auth')
+
+      if (response.status === 404) {
+        return dispatch({
+          type: 'AUTH_ERROR',
+        })
+      }
+
+      let payload = response.data.data
+      payload.token = localStorage.token
+
+      dispatch({
+        type: 'USER_SUCCESS',
+        payload,
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    checkUser()
+  }, [])
+
   return (
     <Routes>
-      <Route exact path="/" element={<LandingPage />} />
+      <Route exact path="/auth" element={<LandingPage />} />
       <Route exact path="/menu" element={<MenuPage />} />
       <Route exact path="/transaction" element={<TransactionsPage />} />
       <Route exact path="/add-company" element={<AddCompanyPage />} />

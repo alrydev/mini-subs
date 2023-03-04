@@ -11,6 +11,7 @@ import (
 type AuthRepository interface {
 	Register(user authdto.RegisterRequest, IdPackage int) error
 	Login(email string) (models.User, error)
+	GetUserAuth(ID int) (models.User, error)
 }
 
 func RepositoryAuth(db *gorm.DB) *repository {
@@ -18,10 +19,12 @@ func RepositoryAuth(db *gorm.DB) *repository {
 }
 
 func (ar *repository) Register(user authdto.RegisterRequest, IDPackage int) error {
+	// transactional begin: 
 	tx := ar.db.Begin()
 	if tx.Error != nil {
 		return tx.Error
 	}
+
 
 	userRecord := models.User{
 		Name:      user.Name,
@@ -32,6 +35,7 @@ func (ar *repository) Register(user authdto.RegisterRequest, IDPackage int) erro
 		UpdatedAt: time.Now(),
 	}
 
+	// add new user
 	if err := tx.Create(&userRecord).Error; err != nil {
 		tx.Rollback()
 		return err
@@ -64,7 +68,14 @@ func (ar *repository) Register(user authdto.RegisterRequest, IDPackage int) erro
 
 func (ar *repository) Login(email string) (models.User, error) {
 	var user models.User
-	err := ar.db.First(&user, "email=?", email).Error
+	err := ar.db.Preload("Company").First(&user, "email=?", email).Error
+
+	return user, err
+}
+
+func (r *repository) GetUserAuth(ID int) (models.User, error) {
+	var user models.User
+	err := r.db.Preload("Company").First(&user, ID).Error
 
 	return user, err
 }

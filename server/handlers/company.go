@@ -21,10 +21,11 @@ func (h *handlerCompany) FindCompanies(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	userInfo := r.Context().Value("userinfo").(jwt.MapClaims)
+	
 	userRole := userInfo["role"]
 	if userRole != "admin" {
 		w.WriteHeader(http.StatusInternalServerError)
-		response := dto.ErrorResult{Code: http.StatusInternalServerError, Message: "unauthorized"}
+		response := dto.ErrorResult{Code: http.StatusInternalServerError, Message: "unauthorized_"}
 		json.NewEncoder(w).Encode(response)
 		return
 	}

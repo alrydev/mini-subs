@@ -59,7 +59,7 @@ function NavbarComponent() {
                             )}
                         </>
                     ) : (
-                        <div onClick={() => navigate("/")} >
+                        <div onClick={() => navigate("/auth")} >
                             <span className='fw-light text-light pointer'>
                                 home
                             </span>
@@ -72,7 +72,7 @@ function NavbarComponent() {
 
                     <Offcanvas placement="end" show={show} onHide={handleClose}>
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                            <Offcanvas.Title>subscribe.ly</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Table >
@@ -96,9 +96,9 @@ function NavbarComponent() {
                                                     <tr className='pointer' onClick={() => navigate("/menu")}>
                                                         <td >Our Services</td>
                                                     </tr>
-                                                    <tr className='pointer'>
+                                                    {/* <tr className='pointer'>
                                                         <td >My Company</td>
-                                                    </tr>
+                                                    </tr> */}
                                                         <tr className='pointer' onClick={() => navigate("/add-company")}>
                                                         <td >Add Company</td>
                                                     </tr>

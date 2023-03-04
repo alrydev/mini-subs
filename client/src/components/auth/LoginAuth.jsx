@@ -51,6 +51,7 @@ export default function LoginAuth({ switchToRegister }) {
                     type: 'LOGIN_SUCCESS',
                     payload: response.data.data
                 })
+                console.log("response: ", response.data.data);
 
                 // setModalLogin(false)
                 Swal2.fire({

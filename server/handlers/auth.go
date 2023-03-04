@@ -55,8 +55,15 @@ func (h *handlerAuth) Register(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(response)
 	}
 
+	registerResponse := authdto.RegisterResponse {
+		Name: user.Name,
+		Email: user.Email,
+		CompanyName: user.CompanyName,
+		Password: user.Password,
+	}
+
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: http.StatusOK, Data: data}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: registerResponse}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -108,10 +115,12 @@ func (h *handlerAuth) Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	loginResponse := authdto.LoginResponse{
+		Id: user.ID,
 		Name:  user.Name,
 		Email: user.Email,
 		Token: token,
 		Role: user.Role,
+		// Company: user.Company,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -120,9 +129,31 @@ func (h *handlerAuth) Login(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// func convertResponseAuth(u models.User) authdto.RegisterResponse {
-// 	return authdto.RegisterResponse{
-// 		Name:     u.Name,
-// 		Password: u.Password,
-// 	}
-// }
+
+func (h *handlerAuth) CheckAuth(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	userInfo := r.Context().Value("userinfo").(jwt.MapClaims)
+	userId := int(userInfo["id"].(float64))
+
+	user, err := h.AuthRepository.GetUserAuth(userId)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
+		json.NewEncoder(w).Encode(response)
+		return
+	}
+
+	CheckAuthResponse := authdto.CheckAuthResponse{
+		Id:      user.ID,
+		Name:    user.Name,
+		Email:   user.Email,
+		Role:    user.Role,
+		Company: user.Company,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	response := dto.SuccessResult{Code: http.StatusOK, Data: CheckAuthResponse}
+	json.NewEncoder(w).Encode(response)
+
+}

@@ -1,12 +1,12 @@
 import React from 'react'
 import NavbarComponent from '../components/parts/NavbarComponent'
-import ServicesComponent from '../components/user/ServicesComponent'
+import VariantsComponent from '../components/user/VariantsComponent'
 
 export default function MenuPage() {
     return (
         <>
             <NavbarComponent />
-            <ServicesComponent />
+            <VariantsComponent />
         </>
     )
 }
