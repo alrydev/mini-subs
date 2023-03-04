@@ -12,7 +12,6 @@ export default function CompaniesComponent() {
         return response.data.data
     })
 
-    console.log("companies ", companies);
 
   return (
     <>

@@ -39,7 +39,6 @@ export default function RegisterAuth({ switchToLogin }) {
             formData.set('email', form.email)
             formData.set('password', form.password)
 
-            console.log(form);
             const response = await API.post('/register', formData, form, config)
             // setMessage(alert)
 

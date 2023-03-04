@@ -15,21 +15,7 @@ const Swal2 = withReactContent(Swal)
 export default function VariantsComponent() {
 
     const [state] = useContext(UserContext)
-    console.log("state variants: ", state);
 
-    // get companies: 
-    let { data: companies } = useQuery('companiesServiceCache', async () => {
-        const response = await API.get('/companies')
-        return response.data.data
-    })
-
-    console.log("yang mau difilter, ", companies);
-
-    let filteredCompanies = companies?.filter(function (e) {
-        return e.user_id === state.user.user_id
-    })
-
-    console.log("ini final", filteredCompanies)
 
     // get variants: 
     let { data: variants } = useQuery('variantsCache', async () => {
@@ -57,7 +43,6 @@ export default function VariantsComponent() {
                 e.target.type === 'file' ? e.target.files : e.target.value
         })
     }
-    console.log(idCompany);
     let id = parseInt(idCompany)
 
     const handleSubscribe = useMutation(async (e) => {
@@ -72,7 +57,6 @@ export default function VariantsComponent() {
             let formData = new FormData()
             formData.set('id', idCompany)
 
-            console.log(formData);
             const response = await API.patch(`/subscribe/${id}`, formData, idCompany, config)
             if (response?.status === 200) {
                 Swal2.fire({

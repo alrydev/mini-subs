@@ -20,7 +20,6 @@ function App() {
 
   const [state, dispatch] = useContext(UserContext)
 
-  console.log("state: ", state);
 
   useEffect(() => {
     if (state.isLogin === false) {

@@ -17,7 +17,6 @@ export default function LoginAuth({ switchToRegister }) {
         password:""
     })
 
-    console.log(formLogin);
     
 
     const handleChange = (e) => {
@@ -37,7 +36,6 @@ export default function LoginAuth({ switchToRegister }) {
                 }
             }
 
-            console.log(formLogin);
 
             const response = await API.post('/login', formLogin, config)
 
@@ -51,7 +49,6 @@ export default function LoginAuth({ switchToRegister }) {
                     type: 'LOGIN_SUCCESS',
                     payload: response.data.data
                 })
-                console.log("response: ", response.data.data);
 
                 // setModalLogin(false)
                 Swal2.fire({

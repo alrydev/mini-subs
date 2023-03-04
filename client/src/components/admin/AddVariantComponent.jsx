@@ -57,7 +57,6 @@ export default function AddVariant() {
         })
         refetch()
       }
-      console.log(response);
 
     } catch (error) {
       console.log(error);
